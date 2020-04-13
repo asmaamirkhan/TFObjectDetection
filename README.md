@@ -1,5 +1,5 @@
 # 👩‍🔬 TensorFlow Object Detection
-Core code of object detection in Tensorflow
+Core code of object detection in Tensorflow, can be used to test models.
 
 ## 🙌 Available Codes
 1. [detect_in_image](./src/detect_in_image.py): Detects or objects in a given image due to given Tensorflow model

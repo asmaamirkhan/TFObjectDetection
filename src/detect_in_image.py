@@ -64,7 +64,7 @@ if __name__ == "__main__":
                         type=str)
     parser.add_argument('-t',
                         '--threshold',
-                        help='Face detection confidence',
+                        help='Object detection confidence',
                         default=0.7,
                         type=float)
     args = parser.parse_args()

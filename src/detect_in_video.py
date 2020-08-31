@@ -34,7 +34,7 @@ def main(args):
         key = cv.waitKey(1)
         if key & 0xFF == ord('q'):
             break
-        # real face detection
+        # real object detection
         boxes, scores, classes, num = odapi.processFrame(frame)
 
         # draw results

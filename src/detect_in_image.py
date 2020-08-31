@@ -17,7 +17,7 @@ def main(args):
     # open image
     image = cv.imread(args.input_image)
 
-    # real face detection
+    # real object detection
     boxes, scores, classes, num = odapi.processFrame(image)
 
     # draw results

@@ -18,7 +18,7 @@ def main(args):
     # open image
     image = cv.imread(args.input_image)
 
-    # real face detection
+    # real object detection
     objects = detector.detect_objects(image, args.threshold)
 
     # draw results

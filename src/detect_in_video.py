@@ -36,7 +36,7 @@ def main(args):
         key = cv.waitKey(1)
         if key & 0xFF == ord('q'):
             break
-        # real face detection
+        # real object detection
         objects = detector.detect_objects(frame, args.threshold)
 
         # draw results

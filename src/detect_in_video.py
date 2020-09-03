@@ -3,7 +3,9 @@
 import os
 import argparse
 import cv2 as cv
-from DetectorAPI import DetectorAPI
+from DetectorAPI import Detector
+from tf_logger import logger
+
 
 def main(args):
     # assign model path and threshold
@@ -11,7 +13,7 @@ def main(args):
     threshold = args.threshold
 
     # create detection object
-    odapi = DetectorAPI(path_to_ckpt=model_path)
+    detector = Detector(model_path=model_path, name="detection")
 
     # open video
     capture = cv.VideoCapture(args.input_video)
@@ -35,16 +37,22 @@ def main(args):
         if key & 0xFF == ord('q'):
             break
         # real face detection
-        boxes, scores, classes, num = odapi.processFrame(frame)
+        objects = detector.detect_objects(frame, args.threshold)
 
         # draw results
-        for i, box in enumerate(boxes):
-            if(scores[i] > threshold):
-                x1, y1, x2, y2 = box
-                cv.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
-                cv.putText(frame, 'class: {}, score: {:.3f}'.format(
-                    classes[i], scores[i]), (x1, y1), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), thickness=2)
+        for obj in objects:
+            # draw rectangle
+            cv.rectangle(frame,
+                         (obj["x1"], obj["y1"]),
+                         (obj["x2"], obj["y2"]),
+                         (255, 255, 255))
 
+            # draw score and class
+            cv.putText(frame,
+                       '{:.2f} {}'.format(obj["score"], obj["id"]),
+                       (obj["x2"], obj["y2"]),
+                       cv.FONT_HERSHEY_SIMPLEX, 0.6,
+                       (255, 255, 0), thickness=2)
         # show image
         cv.imshow('output', frame)
 
@@ -54,9 +62,8 @@ def main(args):
 
     # when any key has been pressed then close window and stop the program
     if args.output_video:
-        print('Video has been saved successfully at', args.output_video, 'path')
-
-    cv.destroyAllWindows()
+        logger.info(
+            "Image has been saved successfully at {} path".format(args.output_image))
 
 
 if __name__ == "__main__":
@@ -84,7 +91,7 @@ if __name__ == "__main__":
                         default=0.7,
                         type=float)
     args = parser.parse_args()
-    print(args)
+
     # if input image path is invalid then stop
     assert os.path.isfile(args.input_video), 'Invalid input file'
 

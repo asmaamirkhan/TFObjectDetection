@@ -9,7 +9,7 @@ class Detector:
         self.graph = tf.Graph()
         self.model_path = model_path
         self.model_name = name
-
+        self.sess = tf.compat.v1.Session(graph=self.graph)
         with self.graph.as_default():
             self.graph_def = tf.compat.v1.GraphDef()
             with tf.io.gfile.GFile(model_path, 'rb') as f:
@@ -44,11 +44,11 @@ class Detector:
 
             # run the model
             (num, scores, boxes,
-                classes) = sess.run(
-                    [sess.graph.get_tensor_by_name('num_detections:0'),
-                     sess.graph.get_tensor_by_name('detection_scores:0'),
-                     sess.graph.get_tensor_by_name('detection_boxes:0'),
-                     sess.graph.get_tensor_by_name('detection_classes:0')],
+                classes) = self.sess.run(
+                    [self.sess.graph.get_tensor_by_name('num_detections:0'),
+                     self.sess.graph.get_tensor_by_name('detection_scores:0'),
+                     self.sess.graph.get_tensor_by_name('detection_boxes:0'),
+                     self.sess.graph.get_tensor_by_name('detection_classes:0')],
                 feed_dict={'image_tensor:0': image_np_expanded})
 
             # parse the results

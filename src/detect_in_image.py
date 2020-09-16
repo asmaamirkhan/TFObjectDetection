@@ -13,7 +13,7 @@ def main(args):
     threshold = args.threshold
 
     # create detection object
-    detector = Detector(model_path=model_path, name = "detection")
+    detector = Detector(model_path=model_path, name="detection")
 
     # open image
     image = cv.imread(args.input_image)
@@ -25,18 +25,17 @@ def main(args):
     for obj in objects:
         # draw rectangle
         cv.rectangle(image,
-                      (obj["x1"], obj["y1"]),
-                      (obj["x2"], obj["y2"]),
-                      (255, 255, 255))
+                     (obj["x1"], obj["y1"]),
+                     (obj["x2"], obj["y2"]),
+                     (255, 255, 255))
 
         # draw score and class
         cv.putText(image,
-                    '{:.2f} {}'.format(obj["score"], obj["id"]),
-                    (obj["x2"], obj["y2"]),
-                    cv.FONT_HERSHEY_SIMPLEX, 0.6,
-                    (255, 255, 0), thickness=2)
-    
-    
+                   '{:.2f} {}'.format(obj["score"], obj["id"]),
+                   (obj["x2"], obj["y2"]),
+                   cv.FONT_HERSHEY_SIMPLEX, 0.6,
+                   (255, 255, 0), thickness=2)
+
     # show image
     cv.imshow('output', image)
 
@@ -45,7 +44,6 @@ def main(args):
         cv.imwrite(args.output_image, image)
         logger.info(
             "Image has been saved successfully at {} path".format(args.output_image))
-    cv.imshow('Output', image)
 
     # when any key has been pressed then close window and stop the program
     cv.waitKey(0)
@@ -77,7 +75,7 @@ if __name__ == "__main__":
                         default=0.7,
                         type=float)
     args = parser.parse_args()
-    
+
     # if input image path is invalid then stop
     assert os.path.isfile(args.input_image), 'Invalid input file'
 

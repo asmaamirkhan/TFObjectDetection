@@ -13,11 +13,15 @@ Core code of object detection in Tensorflow, can be used to test models.
 
 ### For `detect_in_image.py`:
 3. Run:
-   `python detect_in_image.py --input_image <PATH_TO_INPUT_JPG_FILE> --output_image <PATH_TO_OUTPUT_JPG_FILE>  --model_path <PATH_TO_INPUT_PB_FILE> --threshold <THRESHOLD>`
+```bash
+   python detect_in_image.py --input_image <PATH_TO_INPUT_JPG_FILE> --output_image <PATH_TO_OUTPUT_JPG_FILE>  --model_path <PATH_TO_INPUT_PB_FILE> --threshold <THRESHOLD>
+```
 
 ### For `detect_in_video.py`:
 3. Run:
-   `python detect_in_video.py --input_video <PATH_TO_INPUT_MP4_FILE> --output_image <PATH_TO_OUTPUT_MP_FILE>  --model_path <PATH_TO_INPUT_PB_FILE> --threshold <THRESHOLD>`
+```bash
+python detect_in_video.py --input_video <PATH_TO_INPUT_MP4_FILE> --output_image <PATH_TO_OUTPUT_MP_FILE>  --model_path <PATH_TO_INPUT_PB_FILE> --threshold <THRESHOLD>
+```
 
 4. TADAA 🎉 It's done 🤗
 5. Press <kbd>Q</kbd> to stop

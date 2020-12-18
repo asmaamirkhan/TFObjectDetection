@@ -20,7 +20,7 @@ Core code of object detection in Tensorflow, can be used to test models.
 ### For `detect_in_video.py`:
 3. Run:
 ```bash
-python detect_in_video.py --input_video <PATH_TO_INPUT_MP4_FILE> --output_image <PATH_TO_OUTPUT_MP_FILE>  --model_path <PATH_TO_INPUT_PB_FILE> --threshold <THRESHOLD>
+python detect_in_video.py --input_video <PATH_TO_INPUT_MP4_FILE> --output_image <PATH_TO_OUTPUT_MP4_FILE>  --model_path <PATH_TO_INPUT_PB_FILE> --threshold <THRESHOLD>
 ```
 
 4. TADAA 🎉 It's done 🤗
